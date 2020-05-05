@@ -4,90 +4,66 @@
 #include <stdint.h>
 #include <math.h>
 
-SUM()
-{
-}
 
-SUBSTRACT()
+enum STATE
 {
-}
-
-DIVISION()
-{
-}
-
-MULTIPLY()
-{
-}
-
-AND()
-{
-}
-
-OR()
-{
-}
-
-/*typedef enum
-{
-    A,
-    B,
-    C,
+    ADD,
+    SUBSTRACT,
+    DIVIDE,
+    MULTIPLY,
+    AND,
+    OR,
     NUM_STATES
-} STATE;
+};
 
-typedef struct state_type
+typedef enum STATE state_type;
+
+
+typedef struct state_M
 {
-    STATE current_state;
-    float (*calc)(Float, float, STATE *states, ...);
+    state_type current_state;
+    float (*calc)(float, float, state_type *, ...);
 } StateMachineType;
 
+
+float sm_add(float n1, float n2, state_type *state)
+{
+    return n1 + n2;
+}
+
+float sm_substract(float n1, float n2, state_type *state)
+{
+    return n1 - n2;
+}
+
+float sm_divide(float n1, float n2, state_type *state)
+{
+    return n1 / n2;
+}
+
+float sm_multiply(float n1, float n2, state_type *state)
+{
+    return n1 * n2;
+}
+
+float sm_and(float n1, float n2, state_type *state)
+{
+    int temp;
+    temp = (int)n1 & (int)n2;
+    return (float)temp;
+}
+
+float sm_or(float n1, float n2, state_type *state)
+{
+    int temp;
+    temp = (int)n1 | (int)n2;
+    return (float)temp;
+}
+
 StateMachineType StateMachine[NUM_STATES] = {
-    {A, sm_a},
-    {B, sm_b},
-    {C, sm_c}}
-
-void statemachine_run(STATES * state)
-{
-    for (;;)
-    {
-        // Watch-dog
-        previous_state = *state;
-        if (*state > NUM_STATES)
-        {
-            *state = previous_state;
-        }
-        else
-        {
-            // Ask numbers
-            double n1 = askInputValue("Ingresa el primer número ");
-            double n2 = askInputValue("Ingresa el segundo número ");
-
-            // Call calculator
-            double result = stateMachine[*state].calculate(n1, n2, state);
-            printResult(result);
-            break;
-        }
-    }*/
-    /*for(;;){
-        previous_state = state;
-        if (state > NUM_STATES){
-            State = previous_state;
-        } else{
-            temp = (*StateMachine[state])(param1, param2, state);
-        }
-    }*/
-//}
-
-/*float sm_a()
-{
-    if (oper)
-    {
-        *state = B;
-    }
-    e = rnad();
-    if (e > Thres)
-    {
-        *state = C;
-    }
-}*/
+    {ADD, sm_add},
+    {SUBSTRACT, sm_substract},
+    {DIVIDE, sm_divide},
+    {MULTIPLY, sm_multiply},
+    {AND, sm_and},
+    {OR, sm_or}};
