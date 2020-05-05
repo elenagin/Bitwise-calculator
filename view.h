@@ -16,18 +16,32 @@ void final_menu(){
     getchar();
 }
 
-int main_menu(int *num_inputs){
+int main_menu(){
     int op;
 
     system("clear");
-    printf("¿Qué compuerta quieres probar?\n");
-    printf("1. OR\n");
-    printf("2. AND\n");
-    printf("3. XOR\n");
-    printf("4. NOT\n");
-    printf("5. XNOR\n");
-    printf("6. Salir\n");
+    printf("¿Qué operación quieres realizar?\n");
+    printf("1. +\n");
+    printf("2. -\n");
+    printf("3. *\n");
+    printf("4. /\n");
+    printf("5. AND\n");
+    printf("6. OR\n");
+    printf("7. Salir\n");
     printf("Opción: \n");
     scanf("%d", &op);
+
     return op;
+}
+
+int inputs(char ){
+    int num1, num2;
+
+    system("clear");
+    printf("Ingresa el primer número: \n");
+    scanf("%d", &num1);
+    printf("Ingresa el segundo número: \n");
+    scanf("%d", &num2);
+
+    return num1, num2;
 }
